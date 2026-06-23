@@ -1,0 +1,14 @@
+console. log(typeof "Rosario");
+console. log("Prediccion: string");
+console. log(typeof 42)
+console. log("Prediccion: number");
+console. log(typeof 3.14)
+console. log("Prediccion: number");
+console. log(typeof true)
+console. log("Prediccion: boolean");
+console. log(typeof false)
+console. log("Prediccion: boolean");
+console. log(typeof undefined)
+console. log("Prediccion: undefined");
+console. log(typeof null)
+console. log("Prediccion: object");
