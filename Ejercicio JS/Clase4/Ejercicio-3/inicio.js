@@ -9,3 +9,5 @@ for(let a = 0; a <= 30; a++){
         else
             console.log(a)
         }
+/*primero declaro si el conjunto de numeros es divisible entre 3 y 5 
+ya que voy de caso mas especifico a  caso menos especifico*/
