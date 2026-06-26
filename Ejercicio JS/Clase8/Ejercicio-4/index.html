@@ -1,0 +1,39 @@
+<head></head>
+<body>
+    <div id="contenedor"> 
+
+    </div>
+    <script>
+    const jugadores = [
+  { nombre: "Messi",   pais: "🇦🇷 Argentina", goles: 8  },
+  { nombre: "Haaland", pais: "🇳🇴 Noruega",   goles: 12 },
+  { nombre: "Mbappé",  pais: "🇫🇷 Francia",   goles: 5  },
+  { nombre: "Kane",    pais: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", goles: 2  },
+];
+       for(const jugador of jugadores){
+        const contenedor = document.getElementById("contenedor");
+
+  const tarjeta = document.createElement("div");
+  tarjeta.textContent = jugador.nombre;
+  const Titulo = document.createElement("h2");
+  Titulo.textContent = jugador.nombre ;
+  contenedor.appendChild(Titulo);
+
+  const pais = document.createElement("p");
+  pais.textContent =jugador.pais;
+  contenedor.appendChild(pais);
+
+  const ParrafoGoles = document.createElement("p");
+  ParrafoGoles.textContent=`Goles: ${jugador.goles}`
+  contenedor.appendChild(ParrafoGoles);
+
+  tarjeta.classList.add("tarjeta");
+  tarjeta.style.color="Cyan"
+  if (jugador.goles>5) {
+    tarjeta.classList.add("Destacado");
+    tarjeta.style.backgroundColor="gold";
+
+  }
+  contenedor.appendChild(tarjeta);}
+    </script>
+</body>
