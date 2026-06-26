@@ -1,0 +1,15 @@
+<head> </head>
+<body> 
+    <ul id="Grupos">
+    </ul>
+    <script>
+       const grupos= ["Grupo A", "Grupo B", "Grupo C", "Grupo D", "Grupo E"];
+       const lista = document.getElementById("Grupos");
+       for(const grupo of grupos){
+
+       const li = document.createElement("li");
+       li.textContent = grupo;
+       lista.appendChild(li);
+       }
+    </script>
+</body>
