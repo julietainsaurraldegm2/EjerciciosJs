@@ -35,7 +35,9 @@
 
   <input id="buscador" placeholder="Escribí para filtrar...">
 
-  <ul id="lista"></ul>
+  <ul id="lista">
+    
+  </ul>
 
   <script>
     const jugadores = [
@@ -49,13 +51,14 @@
       "Kylian Mbappé",
     ];
 
-    const li = document.createElement("li");
-    li.textContent = jugadores[0];
     const lista = document.getElementById("lista");
-    lista.appendChild(li);
-    for (const jugador of jugadores){
-        console.log(jugador);
+    
+     for (let i = 0; i< jugadores.length; i++){
+    const li = document.createElement("li");
+         li.textContent = jugadores[i];
+        lista.appendChild(li);
     }
+
 
 
     const buscador = document.getElementById("buscador");
@@ -73,3 +76,4 @@
   </script>
 </body>
 </html>
+//A terminar
