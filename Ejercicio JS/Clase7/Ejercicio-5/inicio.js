@@ -5,8 +5,10 @@ const jugadores = [
   { nombre: "Kane",    goles: 0,  partidos: 5 },
   { nombre: "Neymar",  goles: 3,  partidos: 7 },
 ];
-const promedio = jugadores.map (j =>({...j,promedio: Number((j.goles/j.partidos).toFixed(2)) }));
+const ranking = jugadores.map (j =>({...j,promedio: Number((j.goles/j.partidos).toFixed(2)) }));
 
-const mejores = jugadores.filter(jugador => jugador.goles > 1);
-const ordenado = jugadores.sort((a, b) => b.goles - a.goles);
-console.log(`${mejores.nombre}" - "${mejores.goles} "goles" ${promedio}`);
+ranking.filter(jugador => jugador.goles >= 1);
+ranking.sort((a, b) => b.goles - a.goles);
+ranking.map(({ nombre, goles, promedio }) =>`${nombre} — ${goles} goles (${promedio} por partido)`
+  );
+console.log(ranking);
