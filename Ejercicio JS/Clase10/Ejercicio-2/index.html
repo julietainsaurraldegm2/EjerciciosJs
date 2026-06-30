@@ -60,11 +60,14 @@
 
     form.addEventListener("submit", (e)=> {
         e.preventDefault();
+
     const nombre = document.getElementById(nombre);
-    nombre.addEventListener("input")
+    const error = document.getElementById("error");
+    error.textContent = "";
+    nombre.addEventListener("input");
     function validarNombre(nombre) {
         nombre.trim().length === 0;
-        return `Bienvenido/a, ${nombre}`
+        return null || error ;
 }
     });
 
@@ -74,13 +77,8 @@ function tieneNumero(texto) {
   }
   return false;
 }
-    // TODO: Escribí una función validarNombre(nombre) que devuelva
-    // null si el nombre es válido, o un string con el mensaje de error.
-
-    // TODO: Escuchá el evento submit del formulario.
-    //       Usá e.preventDefault(), leé el input, llamá a validarNombre
-    //       y mostrá el resultado en #error o #resultado.
   </script>
 
 </body>
 </html>
+<!--A terminar el ejercicio, pensarlo de otra forma y re acomodarlo -->
