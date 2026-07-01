@@ -57,19 +57,27 @@
   <script>
 
     const form = document.querySelector("#miForm");
-
     form.addEventListener("submit", (e)=> {
-        e.preventDefault();
+    e.preventDefault();
 
-    const nombre = document.getElementById(nombre);
+       function validarNombre() {
+        if (nombre.trim().length === 0) {
+          return "El nombre no puede estar vacío";
+        } else if (nombre.trim().length < 3) {
+          return "El nombre debe tener al menos 3 caracteres";
+        }else if (tieneNumero(nombre)) {
+          return "El nombre no puede contener números";
+        } else return null;
+       }
+        
+    const nombre = document.getElementById("nombre").value;
+    console.log(nombre);
+    const bienvenida = document.getElementById("resultado");
+    bienvenida.textContent = `¡Bienvenido/a ${nombre}!`;
     const error = document.getElementById("error");
-    error.textContent = "";
-    nombre.addEventListener("input");
-    function validarNombre(nombre) {
-        nombre.trim().length === 0;
-        return null || error ;
-}
-    });
+    const mensaje = validarNombre();
+    error.textContent = mensaje ?? "";
+      });
 
 function tieneNumero(texto) {
   for (const caracter of texto) {
@@ -81,4 +89,3 @@ function tieneNumero(texto) {
 
 </body>
 </html>
-<!--A terminar el ejercicio, pensarlo de otra forma y re acomodarlo -->
