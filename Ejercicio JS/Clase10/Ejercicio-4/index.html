@@ -137,8 +137,7 @@
         }
     const sinResultados = document.querySelector("#sin-resultados"); 
     const tarjetasVisibles = document.querySelectorAll(".jugador:not([style*='display: none'])");
-      // TODO: Después del loop, mostrá u ocultá #sin-resultados
-      //       según si quedó alguna tarjeta visible.
+    sinResultados.style.display = tarjetasVisibles.length === 0 ? "block" : "none";
     });
   </script>
 

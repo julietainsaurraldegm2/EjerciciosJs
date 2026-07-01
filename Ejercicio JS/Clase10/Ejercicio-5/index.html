@@ -3,88 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Práctica 02 — Validar un nombre</title>
+  <title>Práctica 05 — Registro con persistencia</title>
   <style>
     body {
       font-family: sans-serif;
-      max-width: 420px;
+      max-width: 440px;
       margin: 40px auto;
       padding: 0 20px;
     }
+    .campo {
+      margin-bottom: 20px;
+    }
     label {
       display: block;
-      margin-bottom: 6px;
       font-weight: bold;
+      margin-bottom: 4px;
     }
     input {
+      display: block;
+      width: 100%;
       padding: 8px;
       font-size: 1rem;
-      width: 100%;
       box-sizing: border-box;
     }
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      min-height: 1.2em;
+      display: block;
+      margin-top: 4px;
+    }
     button {
-      margin-top: 12px;
-      padding: 8px 20px;
+      padding: 10px 24px;
       font-size: 1rem;
       cursor: pointer;
     }
-    #error {
-      color: red;
-      margin-top: 8px;
-      min-height: 1.2em;
-    }
-    #resultado {
-      margin-top: 16px;
-      font-size: 1.1rem;
+    #bienvenida {
+      margin-top: 20px;
+      font-size: 1.2rem;
       color: #1a7a1a;
     }
   </style>
 </head>
 <body>
 
-  <h1>Práctica 02</h1>
-  <p>Ingresá tu nombre. Se validará antes de aceptarlo.</p>
+  <h1>Registro</h1>
 
-  <form id="miForm">
-    <label for="nombre">Nombre</label>
-    <input type="text" id="nombre" placeholder="Ej: María">
-    <p id="error"></p>
-    <button type="submit">Enviar</button>
+  <form id="form">
+
+    <div class="campo">
+      <label for="nombre">Nombre *</label>
+      <input type="text" id="nombre" placeholder="Tu nombre completo">
+      <span class="error" id="error-nombre"></span>
+    </div>
+
+    <div class="campo">
+      <label for="equipo">Equipo favorito (opcional)</label>
+      <input type="text" id="equipo" placeholder="Ej: Argentina">
+    </div>
+
+    <button type="submit">Guardar</button>
+
   </form>
 
-  <p id="resultado"></p>
+  <div id="bienvenida" style="display:none"></div>
+  <button id="btn-salir" style="display:none">Salir</button>
 
   <script>
+const form = document.querySelector("#form");
+const nombreInput = document.querySelector("#nombre");
+const equipoInput = document.querySelector("#equipo");
+const errorNombre = document.querySelector("#error-nombre");
+const bienvenida = document.querySelector("#bienvenida");
+const btnSalir = document.querySelector("#btn-salir");
 
-    const form = document.querySelector("#miForm");
-    form.addEventListener("submit", (e)=> {
-    e.preventDefault();
+function mostrarBienvenida(usuario) {
+    form.style.display = "none";
 
-       function validarNombre() {
-        if (nombre.trim().length === 0) {
-          return "El nombre no puede estar vacío";
-        } else if (nombre.trim().length < 3) {
-          return "El nombre debe tener al menos 3 caracteres";
-        }else if (tieneNumero(nombre)) {
-          return "El nombre no puede contener números";
-        } else return null;
-       }
-        
-    const nombre = document.getElementById("nombre").value;
-    console.log(nombre);
-    const error = document.getElementById("error");
-    const mensaje = validarNombre();
-    error.textContent = mensaje ?? "";
-      });
-
-function tieneNumero(texto) {
-  for (const caracter of texto) {
-    if (caracter >= "0" && caracter <= "9") return true;
-  }
-  return false;
+    bienvenida.textContent =
+        `¡Bienvenido, ${usuario.nombre}! Tu equipo: ${usuario.equipo || "sin equipo"}`;
+    bienvenida.style.display = "block";
+    btnSalir.style.display = "block";
 }
-  </script>
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nombre = nombreInput.value;
+    const equipo = equipoInput.value;
+    if (nombre.trim() === "") {
+        errorNombre.textContent = "El nombre no puede estar vacío.";
+        return;
+    }
+    errorNombre.textContent = "";
+    const usuario = {
+        nombre: nombre.trim(), };
 
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+    mostrarBienvenida(usuario);
+});
+
+btnSalir.addEventListener("click", () => {
+    localStorage.removeItem("usuario");
+    bienvenida.style.display = "none";
+    btnSalir.style.display = "none";
+    form.style.display = "block";
+    nombreInput.value = "";
+    equipoInput.value = "";
+});
+document.addEventListener("DOMContentLoaded", () => {
+    const guardado = localStorage.getItem("usuario");
+    if (guardado) {
+        const usuario = JSON.parse(guardado);
+        mostrarBienvenida(usuario);
+    }
+});
+  </script>
 </body>
 </html>
-<!--A terminar el ejercicio, pensarlo de otra forma y re acomodarlo -->
