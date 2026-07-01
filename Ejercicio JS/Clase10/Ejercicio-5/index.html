@@ -95,8 +95,9 @@ form.addEventListener("submit", (e) => {
     }
     errorNombre.textContent = "";
     const usuario = {
-        nombre: nombre.trim(), };
-
+        nombre: nombre.trim(),
+        equipo: equipo.trim() || null,
+    };
     localStorage.setItem("usuario", JSON.stringify(usuario));
     mostrarBienvenida(usuario);
 });
