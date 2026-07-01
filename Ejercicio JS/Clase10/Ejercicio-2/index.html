@@ -59,6 +59,7 @@
     const form = document.querySelector("#miForm");
     form.addEventListener("submit", (e)=> {
     e.preventDefault();
+    const nombre = document.getElementById("nombre").value;
 
        function validarNombre() {
         if (nombre.trim().length === 0) {
@@ -69,14 +70,17 @@
           return "El nombre no puede contener números";
         } else return null;
        }
-        
-    const nombre = document.getElementById("nombre").value;
-    console.log(nombre);
-    const bienvenida = document.getElementById("resultado");
-    bienvenida.textContent = `¡Bienvenido/a ${nombre}!`;
+
     const error = document.getElementById("error");
     const mensaje = validarNombre();
-    error.textContent = mensaje ?? "";
+    console.log(nombre);
+
+    if (mensaje) {
+        error.textContent = mensaje;
+        return;
+    }
+    const bienvenida = document.getElementById("resultado");
+    bienvenida.textContent = `¡Bienvenido/a ${nombre}!`;
       });
 
 function tieneNumero(texto) {
