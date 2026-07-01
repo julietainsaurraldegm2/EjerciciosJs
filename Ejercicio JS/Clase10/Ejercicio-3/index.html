@@ -76,17 +76,6 @@
   <p id="exito"></p>
 
   <script>
-    // TODO: Escribí las funciones de validación:
-    //   validarNombre(valor)  → null si está bien, o string con el error
-    //   validarEmail(valor)   → null si está bien, o string con el error
-    //   validarPassword(valor)→ null si está bien, o string con el error
-
-    // TODO: Escuchá el evento submit del formulario.
-    //   1. Llamá e.preventDefault()
-    //   2. Leé los tres campos con .value
-    //   3. Validá cada uno
-    //   4. Mostrá los errores en los <span class="error"> correspondientes
-    //   5. Si todo es válido, mostrá el mensaje de éxito en #exito
 
     const form = document.querySelector("#formRegistro");
 
@@ -97,8 +86,36 @@
       const email    = document.querySelector("#email").value;
       const password = document.querySelector("#password").value;
 
-      // --- Completar desde acá ---
+      function validarNombre(valor){
+        if (valor.trim().length === 0){ 
+          return "El nombre no puede estar vacio";
+        }else return null;
+      }
+      function validarEmail(valor){
+        if (!valor.includes("@")){ 
+          return "El email debe contener un @";
+        }else return null;
+      }
+      function validarPassword(valor){
+        if (valor.length < 6){
+          return "La contraseña debe tener al menos 6 caracteres";
+        }else return null;
+      }
+      const errorNombre = validarNombre(nombre);
+      const errorEmail = validarEmail(email);
+      const errorPassword = validarPassword(password);
+      document.querySelector("#error-nombre").textContent = errorNombre ?? "";
+      document.querySelector("#error-email").textContent = errorEmail ?? "";
+      document.querySelector("#error-password").textContent = errorPassword ?? "";
+
+        if (!errorNombre && !errorEmail && !errorPassword) {
+          document.querySelector("#exito").textContent =
+        `¡Registro exitoso! Bienvenido/a ${nombre}`;
+        } else {
+          document.querySelector("#exito").textContent = "";
+        }
     });
+
   </script>
 
 </body>
