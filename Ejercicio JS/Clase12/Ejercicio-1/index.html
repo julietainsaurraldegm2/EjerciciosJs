@@ -46,8 +46,8 @@
     const nombre = localStorage.getItem("nombre");
 
         if(nombre){
-            `¡Hola, ${nombre}!`; = saludo.textContent 
-            nombre; = inputNombre.value 
+            saludo.textContent = `¡Hola, ${nombre}!`;
+            inputNombre.value = nombre;
         }
 
     btnGuardar.addEventListener("click", () => {
