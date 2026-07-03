@@ -70,9 +70,8 @@
   <p id="pendientes">0 tareas pendientes</p>
 
   <script>
-    // TODO 1: al cargar, leer las tareas guardadas en localStorage (clave "tareas")
-    // Si no hay nada, usar un array vacío []
-    let tareas = [];
+
+    let tareas = JSON.parse(localStorage.getItem(tareas))||[];
 
     const lista = document.querySelector("#lista");
     const inputTarea = document.querySelector("#input-tarea");
@@ -84,9 +83,25 @@
     // - Por cada tarea, crea un <li> con el texto y un botón Borrar
     // - Actualiza el contador de pendientes
     function renderizar() {
-      // ...
+      lista.innerHTML ="";
+      tareas.forEach((tareas,indice) => {
+        const li = document.createElement("li");
+        const texto = document.createElement("span");
+        texto.textContent = tarea.texto;
+        const boton = document.createElement("button");
+        boton.textContent ="Borrar";
+         boton.addEventListener("click",() => {
+            tareas.splice(indice,1);
+            localStorage.setItem("tareas", JSON.stringify(tareas));
+            renderizar()
+        });
+        li.appendChild(boton);
+        li.appendChild(texto);
+        lista.appendChild(li);
+    });
+    pendientes.textContent= `${tareas.length} Tareas pendientes`;
+    
     }
-
     btnAgregar.addEventListener("click", () => {
       const texto = inputTarea.value.trim();
       if (texto === "") return;
