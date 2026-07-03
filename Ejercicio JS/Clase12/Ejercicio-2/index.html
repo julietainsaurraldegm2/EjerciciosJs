@@ -50,16 +50,16 @@
     document.querySelector("#btn-mas").addEventListener("click", () => {
       contador++;
       display.textContent = contador;
-      Number(localStorage.setItem("contador"));
-      Number(localStorage.getItem("contador"));
+      Number(localStorage.setItem("contador", contador));
+      Number(localStorage.getItem("contador", contador));
       
     });
 
     document.querySelector("#btn-menos").addEventListener("click", () => {
       contador--;
       display.textContent = contador;
-      Number(localStorage.setItem("contador"));
-      Number(localStorage.getItem("contador"));
+      Number(localStorage.setItem("contador", contador));
+      Number(localStorage.getItem("contador", contador));
     
 
 
