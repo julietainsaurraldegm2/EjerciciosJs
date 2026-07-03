@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<body>
+<button id="Marcador"> ¡Gol!<span class ="Numero"></span></button>
+
+<script>
+    let goles = 0 ;
+    const boton = document.getElementById("Marcador");
+    const numero = document.querySelector(".Numero");
+    boton.addEventListener("click",() =>{
+        goles++
+        numero.textContent= goles; 
+    });
+
+</script>
+</body>
