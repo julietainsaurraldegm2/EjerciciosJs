@@ -78,10 +78,6 @@
     const btnAgregar = document.querySelector("#btn-agregar");
     const pendientes = document.querySelector("#pendientes");
 
-    // TODO 2: implementar la función renderizar()
-    // - Limpia la lista (lista.innerHTML = "")
-    // - Por cada tarea, crea un <li> con el texto y un botón Borrar
-    // - Actualiza el contador de pendientes
     function renderizar() {
       lista.innerHTML ="";
       tareas.forEach((tareas,indice) => {
@@ -105,8 +101,7 @@
     btnAgregar.addEventListener("click", () => {
       const texto = inputTarea.value.trim();
       if (texto === "") return;
-      // TODO 3: crear el objeto tarea, agregarlo al array,
-      // guardar en localStorage y renderizar
+      
       inputTarea.value = "";
     });
 
