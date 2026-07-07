@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de tareas</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 480px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .nueva-tarea {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .nueva-tarea input {
+      flex: 1;
+      font-size: 1rem;
+      padding: 0.4rem 0.6rem;
+    }
+
+    .nueva-tarea button {
+      font-size: 1rem;
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+    }
+
+    #lista {
+      list-style: none;
+      padding: 0;
+    }
+
+    #lista li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #lista li button {
+      cursor: pointer;
+      color: #c0392b;
+      background: none;
+      border: none;
+      font-size: 0.9rem;
+    }
+
+    #pendientes {
+      color: #555;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lista de tareas</h1>
+
+  <div class="nueva-tarea">
+    <input type="text" id="input-tarea" placeholder="Nueva tarea...">
+    <button id="btn-agregar">Agregar</button>
+  </div>
+
+  <ul id="lista"></ul>
+
+  <p id="pendientes">0 tareas pendientes</p>
+
+  <script>
+
+    let tareas = JSON.parse(localStorage.getItem(tareas))||[];
+
+    const lista = document.querySelector("#lista");
+    const inputTarea = document.querySelector("#input-tarea");
+    const btnAgregar = document.querySelector("#btn-agregar");
+    const pendientes = document.querySelector("#pendientes");
+
+    function renderizar() {
+      lista.innerHTML ="";
+      tareas.forEach((tareas,indice) => {
+        const li = document.createElement("li");
+        const texto = document.createElement("span");
+        texto.textContent = tarea.texto;
+        const boton = document.createElement("button");
+        boton.textContent ="Borrar";
+         boton.addEventListener("click",() => {
+            tareas.splice(indice,1);
+            localStorage.setItem("tareas", JSON.stringify(tareas));
+            renderizar()
+        });
+        li.appendChild(boton);
+        li.appendChild(texto);
+        lista.appendChild(li);
+    });
+    pendientes.textContent= `${tareas.length} Tareas pendientes`;
+    
+    }
+    btnAgregar.addEventListener("click", () => {
+      const texto = inputTarea.value.trim();
+      if (texto === "") return;
+      
+      inputTarea.value = "";
+    });
+
+    // Permitir agregar con Enter
+    inputTarea.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") btnAgregar.click();
+    });
+
+    // Renderizar al cargar
+    renderizar();
+  </script>
+</body>
+</html>
